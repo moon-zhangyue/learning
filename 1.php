@@ -1780,33 +1780,33 @@ select DATE_FORMAT(createtime,'%Y-%m') as months,count(*) count from ibt_shop_or
 
 //$private_key = file_get_contents('private_key.pem'); //读取私钥
 //$public_key = file_get_contents('rsa_public_key.pem');//读取公钥
-//$pi_key  =   openssl_pkey_get_private($private_key);//这个函数可用来判断私钥是否是可用的，可用返回资源id Resource id
-//$pu_key  =  openssl_pkey_get_public($public_key);//这个函数可用来判断公钥是否是可用的
+//$pi_key = openssl_pkey_get_private($private_key);//这个函数可用来判断私钥是否是可用的，可用返回资源idResourceid
+//$pu_key = openssl_pkey_get_public($public_key);//这个函数可用来判断公钥是否是可用的
 //
-//$data = 'method=medicool.user.detail&nonce_str=607673¶meters={"test":"2458"}&partnerid=test';//原始数据
+//$data= 'method=medicool.user.detail&nonce_str=607673¶meters={"test":"2458"}&partnerid=test';//原始数据
 //
-//echo "private key encrypt:\n";
+//echo "privatekeyencrypt:\n";
 //
 //openssl_private_encrypt($data, $encrypted, $pi_key);//私钥加密
 //
-//$encrypted  =  base64_encode($encrypted);//加密后的内容通常含有特殊字符，需要编码转换下，在网络间通过url传输时要注意base64编码是否是url安全的
+//$encrypted = base64_encode($encrypted);//加密后的内容通常含有特殊字符，需要编码转换下，在网络间通过url传输时要注意base64编码是否是url安全的
 //$encrypted = urlencode($encrypted);
 //
 //echo $encrypted,"\n";//输出私钥加密后的字符串数据
-//echo "public key decrypt:\n";
+//echo "publickeydecrypt:\n";
 //
 //openssl_public_decrypt(base64_decode(urldecode($encrypted)), $decrypted, $pu_key);//私钥加密的内容通过公钥可用解密出来
 //
 //echo $decrypted,"\n";//通过公钥解密后的字符串数据
-//echo "public key encrypt:\n";
+//echo "publickeyencrypt:\n";
 //
 //openssl_public_encrypt($data, $encrypted, $pu_key);//公钥加密
 //
-//$encrypted  =  (base64_encode($encrypted));
+//$encrypted = (base64_encode($encrypted));
 //$encrypted = urlencode($encrypted);
 //
 //echo $encrypted,"\n";//通过公钥加密后的字符串数据
-//echo "private key decrypt:\n";
+//echo "privatekeydecrypt:\n";
 //
 //openssl_private_decrypt(base64_decode(urldecode($encrypted)), $decrypted, $pi_key);//私钥解密
 //echo $decrypted,"\n";//通过私钥解密后的字符串数据
@@ -2340,7 +2340,21 @@ $b = Database::getInstance();
  var_dump($a === $b);*/
 
 
-$text = 'This is a Simple text.';
+/*$text = 'This is a Simple text.';
 
 // 输出 "is is a Simple text."，因为 'i' 先被匹配
-echo strpbrk($text, 'mi');
+echo strpbrk($text, 'mi');*/
+
+header("content-type:text/html;charset=utf-8");
+$string ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut elit id mi ultricies adipiscing. Nulla facilisi. Praesent pulvinar, sapien vel feugiat vestibulum,nulla dui pretium orci, non ultricies elit lacus quis ante. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Aliquam pretium ullamcorper urna quis iaculis. Etiam ac massased turpis tempor luctus. Curabitur sed nibh eu elitmollis congue. Praesent ipsum diam, consectetur vitae ornare a, aliquam a nunc. In id magna pellentesque tellus posuere adipiscing. Sed non mi metus, at lacinia augue. Sed magna nisi, ornare in mollis in, mollis sed nunc. Etiam at justo in leo congue mollis.Nullam in neque eget metus hendreritscelerisque eu non enim. Ut malesuada lacus eu nulla bibendum id euismod urna sodales. ";
+/*压缩字符串*/
+
+$compressed = gzcompress($string);
+echo "Original size: ". strlen($string);
+/* 输出原始大小 Original size:773 */
+echo "Compressed size: ". strlen($compressed);
+/* 输出压缩后的大小 Compressed size: 396 */
+// 解压缩
+$original = gzuncompress($compressed);
+echo $original;
+var_dump($compressed);
