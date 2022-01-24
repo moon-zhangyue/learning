@@ -2338,3 +2338,9 @@ var_dump($lastKey);*/
 $a = Database::getInstance();
 $b = Database::getInstance();
  var_dump($a === $b);*/
+
+
+$text = 'This is a Simple text.';
+
+// 输出 "is is a Simple text."，因为 'i' 先被匹配
+echo strpbrk($text, 'mi');
