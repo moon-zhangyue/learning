@@ -2358,3 +2358,4 @@ echo "Compressed size: ". strlen($compressed);
 $original = gzuncompress($compressed);
 echo $original;
 var_dump($compressed);
+var_dump($string);
