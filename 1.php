@@ -2357,5 +2357,5 @@ echo "Compressed size: ". strlen($compressed);
 // 解压缩
 $original = gzuncompress($compressed);
 echo $original;
-var_dump($compressed);
-var_dump($string);
+//var_dump($compressed);
+//var_dump($string);
