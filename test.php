@@ -163,8 +163,8 @@ assert('1 == 2', '1 不可能等于 2');*/
 //    echo $e->getMessage();
 //}
 
-try {
+/*try {
     assert('a +== 1');
 } catch (Throwable $e) {
     echo $e->getMessage(), "\n";
-}
+}*/
