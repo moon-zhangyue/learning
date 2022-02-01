@@ -47,8 +47,19 @@ function deepFlatten($items): array
             $result = array_merge($result, deepFlatten($item));
         }
     }
-
     return $result;
 }
 
 var_dump(deepFlatten([1, [2], [[3], 4], 5])); // [1, 2, 3, 4, 5]
+
+
+/*drop
+返回一个新数组，并从左侧弹出n个元素。*/
+function drop($items, $n = 1): array
+{
+    return array_slice($items, $n);
+}
+
+drop([1, 2, 3]); // [2,3]
+var_dump(drop([1, 2, 3], 2)); // [3]
+var_dump(array_slice([1, 2, 3], 2));
