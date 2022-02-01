@@ -63,3 +63,17 @@ function drop($items, $n = 1): array
 drop([1, 2, 3]); // [2,3]
 var_dump(drop([1, 2, 3], 2)); // [3]
 var_dump(array_slice([1, 2, 3], 2));
+
+/*findLast
+返回所提供的函数为其返回的有效值（即过滤后的值）的最后一个元素的键值（value）。*/
+function findLast($items, $func)
+{
+    $filteredItems = array_filter($items, $func);
+
+    return array_pop($filteredItems);
+}
+
+var_dump(findLast([1, 2, 3, 4], function ($n) {
+    return ($n % 2) === 1;
+}));
+// 3
