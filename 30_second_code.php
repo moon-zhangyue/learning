@@ -10,7 +10,7 @@
 //排列
 //all
 //如果所提供的函数返回 true 的数量等于数组中成员数量的总和，则函数返回 true，否则返回 false。
-function all($items, $func)
+function all($items, $func): bool
 {
     return count(array_filter($items, $func)) === count($items);
 }
@@ -24,7 +24,7 @@ all([2, 3, 4, 5], function ($item) {
 /*any
 如果提供的函数对数组中的至少一个元素返回true，则返回true，否则返回false。*/
 
-function any($items, $func)
+function any($items, $func): bool
 {
     return count(array_filter($items, $func)) > 0;
 }
