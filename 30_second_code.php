@@ -77,3 +77,16 @@ var_dump(findLast([1, 2, 3, 4], function ($n) {
     return ($n % 2) === 1;
 }));
 // 3
+
+//findLastIndex 返回所提供的函数为其返回的有效值（即过滤后的值）的最后一个元素的键名（key）。
+function findLastIndex($items, $func): int
+{
+    $keys = array_keys(array_filter($items, $func));
+
+    return array_pop($keys);
+}
+
+findLastIndex([1, 2, 3, 4], function ($n) {
+    return ($n % 2) === 1;
+});
+// 2
