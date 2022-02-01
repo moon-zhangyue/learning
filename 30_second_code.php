@@ -19,3 +19,17 @@ function all($items, $func)
 all([2, 3, 4, 5], function ($item) {
     return $item > 1;
 }); // true
+
+
+/*any
+如果提供的函数对数组中的至少一个元素返回true，则返回true，否则返回false。*/
+
+function any($items, $func)
+{
+    return count(array_filter($items, $func)) > 0;
+}
+
+//Examples
+any([1, 2, 3, 4], function ($item) {
+    return $item < 2;
+}); // true
