@@ -224,6 +224,7 @@ function factorial($n)
 //Examples
 factorial(6); // 720
 
+//最大公约数
 function gcd(...$numbers)
 {
     if (count($numbers) > 2) {
@@ -234,5 +235,19 @@ function gcd(...$numbers)
     return $r === 0 ? abs($numbers[1]) : gcd($numbers[1], $r);
 }
 
-var_dump(gcd(8, 36)); // 4
+//var_dump(gcd(8, 36)); // 4
 var_dump(gcd(12, 8, 32)); // 4
+
+//maxN从提供的数组中返回最大的数的个数。
+function maxN($numbers): int
+{
+    $maxValue = max($numbers);
+    $maxValueArray = array_filter($numbers, function ($value) use ($maxValue) {
+        return $maxValue === $value;
+    });
+
+    return count($maxValueArray);
+}
+//Examples
+var_dump(maxN([1, 2, 3, 4, 5, 5])); // 2
+maxN([1, 2, 3, 4, 5]); // 1
