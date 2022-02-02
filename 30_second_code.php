@@ -211,3 +211,28 @@ function average(...$items)
 }
 
 var_dump(average(1, 2, 3)); // 2
+
+function factorial($n)
+{
+    if ($n <= 1) {
+        return 1;
+    }
+
+    return $n * factorial($n - 1);
+}
+
+//Examples
+factorial(6); // 720
+
+function gcd(...$numbers)
+{
+    if (count($numbers) > 2) {
+        return array_reduce($numbers, 'gcd');
+    }
+
+    $r = $numbers[0] % $numbers[1];
+    return $r === 0 ? abs($numbers[1]) : gcd($numbers[1], $r);
+}
+
+var_dump(gcd(8, 36)); // 4
+var_dump(gcd(12, 8, 32)); // 4
