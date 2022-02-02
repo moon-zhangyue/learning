@@ -92,7 +92,7 @@ findLastIndex([1, 2, 3, 4], function ($n) {
 // 2
 
 //groupBy 根据给定的函数对数组的元素进行分组。
-function groupBy($items, $func)
+function groupBy($items, $func): array
 {
     $group = [];
     foreach ($items as $item) {
