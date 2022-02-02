@@ -173,6 +173,7 @@ function without($items, ...$params): array
 {
     return array_values(array_diff($items, $params));
 }
+
 without([2, 1, 2, 3, 5, 8], 1, 2, 8); // [3, 5]
 
 //orderBy按键名对数组或对象的集合进行排序。
@@ -180,7 +181,7 @@ function orderBy($items, $attr, $order): array
 {
     $sortedItems = [];
     foreach ($items as $item) {
-        $key = is_object($item) ? $item->{$attr} : $item[$attr];
+        $key               = is_object($item) ? $item->{$attr} : $item[$attr];
         $sortedItems[$key] = $item;
     }
     if ($order === 'desc') {
@@ -200,4 +201,13 @@ orderBy(
     ],
     'id',
     'desc'
-); // [['id' => 3, 'name' => 'Khaja'], ['id' => 2, 'name' => 'Joy'], ['id' => 1, 'name
+); // [['id' => 3, 'name' => 'Khaja'], ['id' => 2, 'name' => 'Joy'], ['id' => 1, 'name'=> 'Raja']
+
+function average(...$items)
+{
+    $count = count($items);
+
+    return $count === 0 ? 0 : array_sum($items) / $count;
+}
+
+var_dump(average(1, 2, 3)); // 2
