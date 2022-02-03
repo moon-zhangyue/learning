@@ -13,7 +13,6 @@ $diff = $end->diff($start);
 echo 'Difference: ' . $diff->format('%m month, %d days (total: %a days)') . "\n";
 // Difference: 1 month, 6 days (total: 37 days)
 
-
 // output all thursdays between $start and $end
 $periodInterval = DateInterval::createFromDateString('first thursday');
 $periodIterator = new DatePeriod($start, $periodInterval, $end, DatePeriod::EXCLUDE_START_DATE);

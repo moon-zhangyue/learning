@@ -241,13 +241,23 @@ var_dump(gcd(12, 8, 32)); // 4
 //maxN从提供的数组中返回最大的数的个数。
 function maxN($numbers): int
 {
-    $maxValue = max($numbers);
+    $maxValue      = max($numbers);
     $maxValueArray = array_filter($numbers, function ($value) use ($maxValue) {
         return $maxValue === $value;
     });
 
     return count($maxValueArray);
 }
+
 //Examples
 var_dump(maxN([1, 2, 3, 4, 5, 5])); // 2
 maxN([1, 2, 3, 4, 5]); // 1
+
+//endsWith-判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回true，否则返回false。
+function endsWith($haystack, $needle): bool
+{
+    return strrpos($haystack, $needle) === (strlen($haystack) - strlen($needle));
+}
+
+var_dump(endsWith('Hi, this is me', 'me')); // true
+
