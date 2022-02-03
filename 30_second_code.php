@@ -325,7 +325,7 @@ function compose(...$functions)
 }
 
 $compose = compose(
-// add 2
+    // add 2
     function ($x) {
         return $x + 2;
     },
