@@ -308,4 +308,32 @@ function isContains($string, $needle)
 var_dump(isContains('This is an example string', 'example')); // true
 isContains('This is an example string', 'hello'); // false
 
+//compose返回一个将多个函数组合成单个可调用函数的新函数。
+function compose(...$functions)
+{
+    return array_reduce(
+        $functions,
+        function ($carry, $function) {
+            return function ($x) use ($carry, $function) {
+                return $function($carry($x));
+            };
+        },
+        function ($x) {
+            return $x;
+        }
+    );
+}
+
+$compose = compose(
+    // add 2
+    function ($x) {
+        return $x + 2;
+    },
+    // multiply 4
+    function ($x) {
+        return $x * 4;
+    }
+);
+$compose(3); // 20
+
 
