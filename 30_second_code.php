@@ -365,5 +365,34 @@ var_dump($memoizedAdd(5)); // ['result' => 15, 'cached' => false]
 var_dump($memoizedAdd(6)); // ['result' => 16, 'cached' => false]
 var_dump($memoizedAdd(5)); // ['result' => 15, 'cached' => true]
 
+//curry(柯里化)把函数与传递给他的参数相结合，产生一个新的函数。
+function curry($function)
+{
+    $accumulator = function ($arguments) use ($function, &$accumulator) {
+        return function (...$args) use ($function, $arguments, $accumulator) {
+            $arguments      = array_merge($arguments, $args);
+            $reflection     = new ReflectionFunction($function);
+            $totalArguments = $reflection->getNumberOfRequiredParameters();
+
+            if ($totalArguments <= count($arguments)) {
+                return $function(...$arguments);
+            }
+
+            return $accumulator($arguments);
+        };
+    };
+
+    return $accumulator([]);
+}
+
+$curriedAdd = curry(
+    function ($a, $b) {
+        return $a + $b;
+    }
+);
+
+$add10 = $curriedAdd(10);
+var_dump($add10(15)); // 25
+
 
 
