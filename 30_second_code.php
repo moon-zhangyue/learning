@@ -261,3 +261,51 @@ function endsWith($haystack, $needle): bool
 
 var_dump(endsWith('Hi, this is me', 'me')); // true
 
+//firstStringBetween-返回参数start和end中字符串之间的第一个字符串。
+function firstStringBetween($haystack, $start, $end): string
+{
+    return trim(strstr(strstr($haystack, $start), $end, true), $start . $end);
+}
+
+firstStringBetween('This is a [custom] string', '[', ']'); // custom
+
+/*isAnagram-检查一个字符串是否是另一个字符串的变位元(不区分大小写，忽略空格、标点符号和特殊字符)。
+就是所谓的字谜*/
+function isAnagram($string1, $string2): bool
+{
+    return count_chars($string1, 1) === count_chars($string2, 1);
+}
+
+isAnagram('fuck', 'fcuk'); // true
+isAnagram('fuckme', 'fuckyou'); // false
+
+//countVowels返回给定字符串中的元音数。使用正则表达式来计算字符串中元音(A, E, I, O, U)的数量。
+function countVowels($string): int
+{
+    preg_match_all('/[aeiou]/i', $string, $matches);
+    var_dump($matches);
+    return count($matches[0]);
+}
+
+countVowels('sampleInput'); // 4
+
+/*decapitalize
+使字符串的第一个字母去大写。对字符串的第一个字母进行无头化，然后将其与字符串的其他部分相加。省略upperRest参数以保持字符串的其余部分完整，或将其设置为true以转换为大写。*/
+function decapitalize($string, $upperRest = false): string
+{
+    return lcfirst($upperRest ? strtoupper($string) : $string);
+}
+
+decapitalize('FooBar'); // 'fooBar'
+
+/*isContains
+检查给定字符串输入中是否存在单词或者子字符串。使用strpos查找字符串中第一个出现的子字符串的位置。返回true或false。*/
+function isContains($string, $needle)
+{
+    return strpos($string, $needle);//初始位置是0 需要全等判断
+}
+
+var_dump(isContains('This is an example string', 'example')); // true
+isContains('This is an example string', 'hello'); // false
+
+
