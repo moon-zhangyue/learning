@@ -325,7 +325,7 @@ function compose(...$functions)
 }
 
 $compose = compose(
-    // add 2
+// add 2
     function ($x) {
         return $x + 2;
     },
@@ -335,5 +335,35 @@ $compose = compose(
     }
 );
 $compose(3); // 20
+
+//memoize创建一个会缓存func结果的函数，可以看做是全局函数。
+function memoize($func): Closure
+{
+    return function () use ($func) {
+        static $cache = [];
+
+        $args   = func_get_args();
+        $key    = serialize($args);
+        $cached = true;
+
+        if (!isset($cache[$key])) {
+            $cache[$key] = $func(...$args);
+            $cached      = false;
+        }
+
+        return ['result' => $cache[$key], 'cached' => $cached];
+    };
+}
+
+$memoizedAdd = memoize(
+    function ($num) {
+        return $num + 10;
+    }
+);
+
+var_dump($memoizedAdd(5)); // ['result' => 15, 'cached' => false]
+var_dump($memoizedAdd(6)); // ['result' => 16, 'cached' => false]
+var_dump($memoizedAdd(5)); // ['result' => 15, 'cached' => true]
+
 
 
