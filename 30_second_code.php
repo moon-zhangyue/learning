@@ -306,7 +306,7 @@ function isContains($string, $needle)
 }
 
 var_dump(isContains('This is an example string', 'example')); // true
-isContains('This is an example string', 'hello'); // false
+var_dump(isContains('This is an example string', 'hello')); // false
 
 //compose返回一个将多个函数组合成单个可调用函数的新函数。
 function compose(...$functions)
@@ -366,7 +366,7 @@ var_dump($memoizedAdd(6)); // ['result' => 16, 'cached' => false]
 var_dump($memoizedAdd(5)); // ['result' => 15, 'cached' => true]
 
 //curry(柯里化)把函数与传递给他的参数相结合，产生一个新的函数。
-function curry($function)
+function curry($function): Closure
 {
     $accumulator = function ($arguments) use ($function, &$accumulator) {
         return function (...$args) use ($function, $arguments, $accumulator) {
