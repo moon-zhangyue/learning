@@ -25,11 +25,12 @@ $success = function () {
     echo "最后：输出纯净水" . PHP_EOL;
 };
 
-$callback    = function ($next, $step) {
+$callback = function ($next, $step) {
     return function () use ($next, $step) {
         return $step($next);
     };
 };
+
 $middleWares = [
     $step1,
     $step2,
