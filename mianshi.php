@@ -23,3 +23,13 @@ function get_count(): int
 ++$count;
 get_count();
 echo get_count();
+
+
+$a = [1, 2, 3];
+foreach ($a as &$v) {
+
+}
+foreach ($a as $v) {
+
+}
+echo json_encode($a);
