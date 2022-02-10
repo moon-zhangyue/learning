@@ -2345,17 +2345,54 @@ $b = Database::getInstance();
 // 输出 "is is a Simple text."，因为 'i' 先被匹配
 echo strpbrk($text, 'mi');*/
 
-header("content-type:text/html;charset=utf-8");
-$string ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut elit id mi ultricies adipiscing. Nulla facilisi. Praesent pulvinar, sapien vel feugiat vestibulum,nulla dui pretium orci, non ultricies elit lacus quis ante. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Aliquam pretium ullamcorper urna quis iaculis. Etiam ac massased turpis tempor luctus. Curabitur sed nibh eu elitmollis congue. Praesent ipsum diam, consectetur vitae ornare a, aliquam a nunc. In id magna pellentesque tellus posuere adipiscing. Sed non mi metus, at lacinia augue. Sed magna nisi, ornare in mollis in, mollis sed nunc. Etiam at justo in leo congue mollis.Nullam in neque eget metus hendreritscelerisque eu non enim. Ut malesuada lacus eu nulla bibendum id euismod urna sodales. ";
-/*压缩字符串*/
-
-$compressed = gzcompress($string);
-echo "Original size: ". strlen($string);
-/* 输出原始大小 Original size:773 */
-echo "Compressed size: ". strlen($compressed);
-/* 输出压缩后的大小 Compressed size: 396 */
-// 解压缩
-$original = gzuncompress($compressed);
-echo $original;
+//header("content-type:text/html;charset=utf-8");
+//$string ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut elit id mi ultricies adipiscing. Nulla facilisi. Praesent pulvinar, sapien vel feugiat vestibulum,nulla dui pretium orci, non ultricies elit lacus quis ante. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Aliquam pretium ullamcorper urna quis iaculis. Etiam ac massased turpis tempor luctus. Curabitur sed nibh eu elitmollis congue. Praesent ipsum diam, consectetur vitae ornare a, aliquam a nunc. In id magna pellentesque tellus posuere adipiscing. Sed non mi metus, at lacinia augue. Sed magna nisi, ornare in mollis in, mollis sed nunc. Etiam at justo in leo congue mollis.Nullam in neque eget metus hendreritscelerisque eu non enim. Ut malesuada lacus eu nulla bibendum id euismod urna sodales. ";
+///*压缩字符串*/
+//
+//$compressed = gzcompress($string);
+//echo "Original size: ". strlen($string);
+///* 输出原始大小 Original size:773 */
+//echo "Compressed size: ". strlen($compressed);
+///* 输出压缩后的大小 Compressed size: 396 */
+//// 解压缩
+//$original = gzuncompress($compressed);
+//echo $original;
 //var_dump($compressed);
 //var_dump($string);
+
+/*通过位运算符异或方式
+上面所说的方式并不是这次的重点，本次主要想记录一下通过位运算符的方式来交换 2 个变量，并且不借助于第三方变量。先看代码*/
+function swapByBit(&$a, &$b)
+{
+    $a = $a ^ $b;
+    $b = $a ^ $b;
+    $a = $a ^ $b;
+}
+
+$a = 1;
+$b = 2;
+
+swapByBit($a, $b);
+var_dump($a, $b);
+// int(2)
+// int(1)
+
+/*通过位运算符的方式主要是基于异或 (^) 运算的如下特性：
+任意一个变量 X 与其自身进行异或运算，结果为 0，即 X^X=0
+任意一个变量 X 与 0 进行异或运算，结果不变，即 X^0=X
+异或运算具有可结合性，即 a^b^c =（a^b）^c = a^（b^c）
+异或运算具有可交换性，即 a^b = b^a
+更新一波 php 通过 list 方法交换 2 个变量*/
+
+function swap(&$a, &$b)
+{
+    list($a, $b) = [$b, $a];
+}
+
+$a = 1;
+$b = 2;
+
+swap($a, $b);
+var_dump($a, $b);
+// int(2)
+// int(1)
