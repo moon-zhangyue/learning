@@ -27,6 +27,8 @@ $success = function () {
 
 $callback = function ($next, $step) {
     return function () use ($next, $step) {
+        var_dump($next);
+        var_dump($step);
         return $step($next);
     };
 };
@@ -38,7 +40,7 @@ $middleWares = [
 ];
 
 $middleWares = array_reverse($middleWares); //将数组元素顺序反转
-
+var_dump($middleWares);
 call_user_func(
     array_reduce($middleWares, $callback, $success)
 );
