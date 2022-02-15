@@ -4,7 +4,7 @@ require_once './lib.php';
 class SmsJob
 {
 
-    private $name;
+    private $name; //属性可以改为局部变量
 
     private $mobile;
 
