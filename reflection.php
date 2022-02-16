@@ -6,7 +6,6 @@
  * Module: reflection.php
  * 反射
  */
-
 class person
 {
     public string $name;
@@ -33,7 +32,26 @@ class person
     }
 }
 
-$student         = new person();
+$student = new person();
+
 $student->name   = 'Tom';
 $student->gender = 'male';
 $student->age    = 24;
+
+$reflect = new ReflectionObject($student);
+
+$props = $reflect->getProperties();
+
+foreach ($props as $prop) {
+    print $prop->getName() . "\n";
+}
+
+var_dump($props);
+foreach ($props as $prop) {
+    print $prop->getName() . "\n";
+}
+// 获取对象方法列表
+$m = $reflect->getMethods();
+foreach ($m as $prop) {
+    print $prop->getName() . "\n";
+}
