@@ -45,11 +45,6 @@ $props = $reflect->getProperties();
 foreach ($props as $prop) {
     print $prop->getName() . "\n";
 }
-
-var_dump($props);
-foreach ($props as $prop) {
-    print $prop->getName() . "\n";
-}
 // 获取对象方法列表
 $m = $reflect->getMethods();
 foreach ($m as $prop) {
