@@ -73,7 +73,7 @@ var_dump(memory_get_usage());//获取内存方法，加上true返回实际内存
 $a = "a";
 $b = $a;
 $c = $a;
-var_dump(memory_get_usage());
+var_dump(memory_get_usage()); //PHP的释放机制,程序还未运行完,此时的unset并为真正释放内存
 unset($a);
 var_dump(memory_get_usage());
 
