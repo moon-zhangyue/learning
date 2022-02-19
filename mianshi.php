@@ -7,7 +7,7 @@
  * Please No Garbage Code!
  */
 
-$a = [0, 1, 2, 3];
+/*$a = [0, 1, 2, 3];
 $b = [1, 2, 3, 4, 5];
 $a += $b;
 echo json_encode($a);
@@ -39,7 +39,7 @@ echo json_encode($a);
 如果输入的数组中有相同的字符串键名，则该键名后面的值将覆盖前一个值。然而，如果数组包含数字键名，后面的值将 不会 覆盖原来的值，而是附加到后面。
 如果输入的数组存在以数字作为索引的内容，则这项内容的键名会以连续方式重新索引
  * */
-$a = ['10022' => 'mm', '10023' => 'dd'];
+/*$a = ['10022' => 'mm', '10023' => 'dd'];
 $b = ['p' => 1, 'q' => 2];
 
 var_dump(array_merge($a, $b));
@@ -66,7 +66,15 @@ $person2      = $person;
 $person2->lan = '英文';
 
 $person2->speak();
-$person->speak();
+$person->speak();*/
 
+//内存
+var_dump(memory_get_usage());//获取内存方法，加上true返回实际内存，不加则返回表现内存
+$a = "a";
+$b = $a;
+$c = $a;
+var_dump(memory_get_usage());
+unset($a);
+var_dump(memory_get_usage());
 
 
