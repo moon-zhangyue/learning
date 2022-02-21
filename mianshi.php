@@ -69,12 +69,39 @@ $person2->speak();
 $person->speak();*/
 
 //内存
-var_dump(memory_get_usage());//获取内存方法，加上true返回实际内存，不加则返回表现内存
-$a = "a";
-$b = $a;
-$c = $a;
-var_dump(memory_get_usage()); //PHP的释放机制,程序还未运行完,此时的unset并为真正释放内存
-unset($a);
-var_dump(memory_get_usage());
+//var_dump(memory_get_usage());//获取内存方法，加上true返回实际内存，不加则返回表现内存
+//$a = "a";
+//$b = $a;
+//$c = $a;
+//var_dump(memory_get_usage()); //PHP的释放机制,程序还未运行完,此时的unset并为真正释放内存
+//unset($a);
+//var_dump(memory_get_usage());
 
+//var_dump(memory_get_usage(true));//注意获取的是real_size
+//$a = "laruence";
+//var_dump(memory_get_usage(true));
+//unset($a);
+//var_dump(memory_get_usage(true));
+//输出
+//int 262144
+//int 262144
+//int 262144
+
+$a = "hello";
+//定义变量时，存储两个方面：
+//1.变量名，存储在符号表
+//2.变量值存储在内存空间
+//3.在删除变量的时候，会将变量值存储的空间释放，而变量名所在的符号表不会减小（只增不减）
+
+var_dump(memory_get_usage());
+for ($i = 0; $i < 100; $i++) {
+    $a  = "test" . $i;
+    $$a = "hello";
+}
+var_dump(memory_get_usage());
+for ($i = 0; $i < 100; $i++) {
+    $a = "test" . $i;
+    unset($$a);
+}
+var_dump(memory_get_usage());
 
