@@ -87,21 +87,49 @@ $person->speak();*/
 //int 262144
 //int 262144
 
-$a = "hello";
+//$a = "hello";
 //定义变量时，存储两个方面：
 //1.变量名，存储在符号表
 //2.变量值存储在内存空间
 //3.在删除变量的时候，会将变量值存储的空间释放，而变量名所在的符号表不会减小（只增不减）
 
-var_dump(memory_get_usage());
-for ($i = 0; $i < 100; $i++) {
-    $a  = "test" . $i;
-    $$a = "hello";
-}
-var_dump(memory_get_usage());
-for ($i = 0; $i < 100; $i++) {
-    $a = "test" . $i;
-    unset($$a);
-}
-var_dump(memory_get_usage());
+//var_dump(memory_get_usage());
+//for ($i = 0; $i < 100; $i++) {
+//    $a  = "test" . $i;
+//    $$a = "hello";
+//}
+//var_dump(memory_get_usage());
+//for ($i = 0; $i < 100; $i++) {
+//    $a = "test" . $i;
+//    unset($$a);
+//}
+//var_dump(memory_get_usage());
 
+//$a = 1;
+//xdebug_debug_zval("a");
+//echo PHP_EOL;//换行符，提高代码的源代码级可移植性
+
+//$a = "new string";
+//$c = $b = $a;
+//xdebug_debug_zval('a');
+//unset($b, $c);
+//xdebug_debug_zval('a');
+
+echo '测试字符串引用计数';
+$a = "new string";
+$b = $a;
+xdebug_debug_zval('a');
+unset($b);
+xdebug_debug_zval('a');
+$b = &$a;
+xdebug_debug_zval('a');
+echo '测试数组引用计数';
+$c = array('a', 'b');
+xdebug_debug_zval('c');
+$d = $c;
+xdebug_debug_zval('c');
+$c[2] = 'c';
+xdebug_debug_zval('c');
+echo '测试int型计数';
+$e = 1;
+xdebug_debug_zval('e');
