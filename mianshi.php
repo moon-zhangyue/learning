@@ -105,31 +105,25 @@ $person->speak();*/
 //}
 //var_dump(memory_get_usage());
 
-//$a = 1;
-//xdebug_debug_zval("a");
-//echo PHP_EOL;//换行符，提高代码的源代码级可移植性
+//$name = "咖啡色的羊驼";
+//xdebug_debug_zval('name');
+//
+//$name      = "咖啡色的羊驼";
+//$temp_name = $name;
+//xdebug_debug_zval('name');
+
 
 //$a = "new string";
 //$c = $b = $a;
-//xdebug_debug_zval('a');
-//unset($b, $c);
-//xdebug_debug_zval('a');
+//xdebug_debug_zval( 'a' );
+//unset( $b, $c );
+//xdebug_debug_zval( 'a' );
 
-echo '测试字符串引用计数';
-$a = "new string";
-$b = $a;
-xdebug_debug_zval('a');
-unset($b);
-xdebug_debug_zval('a');
-$b = &$a;
-xdebug_debug_zval('a');
-echo '测试数组引用计数';
-$c = array('a', 'b');
-xdebug_debug_zval('c');
-$d = $c;
-xdebug_debug_zval('c');
-$c[2] = 'c';
-xdebug_debug_zval('c');
-echo '测试int型计数';
-$e = 1;
-xdebug_debug_zval('e');
+//$a = 0;
+//$b = null;
+//var_dump(isset($a));
+//var_dump(isset($b));
+//var_dump(empty($a));
+
+//$a = array(0 => "Dog", 1 => "Cat", 2 => "Horse");
+//var_dump(array_flip($a));
