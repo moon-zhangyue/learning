@@ -87,21 +87,40 @@ $person->speak();*/
 //int 262144
 //int 262144
 
-$a = "hello";
+//$a = "hello";
 //定义变量时，存储两个方面：
 //1.变量名，存储在符号表
 //2.变量值存储在内存空间
 //3.在删除变量的时候，会将变量值存储的空间释放，而变量名所在的符号表不会减小（只增不减）
 
-var_dump(memory_get_usage());
-for ($i = 0; $i < 100; $i++) {
-    $a  = "test" . $i;
-    $$a = "hello";
-}
-var_dump(memory_get_usage());
-for ($i = 0; $i < 100; $i++) {
-    $a = "test" . $i;
-    unset($$a);
-}
-var_dump(memory_get_usage());
+//var_dump(memory_get_usage());
+//for ($i = 0; $i < 100; $i++) {
+//    $a  = "test" . $i;
+//    $$a = "hello";
+//}
+//var_dump(memory_get_usage());
+//for ($i = 0; $i < 100; $i++) {
+//    $a = "test" . $i;
+//    unset($$a);
+//}
+//var_dump(memory_get_usage());
 
+//$name = "咖啡色的羊驼";
+//xdebug_debug_zval('name');
+//
+//$name      = "咖啡色的羊驼";
+//$temp_name = $name;
+//xdebug_debug_zval('name');
+
+
+//$a = "new string";
+//$c = $b = $a;
+//xdebug_debug_zval( 'a' );
+//unset( $b, $c );
+//xdebug_debug_zval( 'a' );
+
+$a = 0;
+$b = null;
+var_dump(isset($a));
+var_dump(isset($b));
+var_dump(empty($a));
