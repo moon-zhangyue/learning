@@ -119,8 +119,11 @@ $person->speak();*/
 //unset( $b, $c );
 //xdebug_debug_zval( 'a' );
 
-$a = 0;
-$b = null;
-var_dump(isset($a));
-var_dump(isset($b));
-var_dump(empty($a));
+//$a = 0;
+//$b = null;
+//var_dump(isset($a));
+//var_dump(isset($b));
+//var_dump(empty($a));
+
+//$a = array(0 => "Dog", 1 => "Cat", 2 => "Horse");
+//var_dump(array_flip($a));
