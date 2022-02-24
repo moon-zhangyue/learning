@@ -7,7 +7,7 @@
  */
 
 spl_autoload_register(function ($className) {
-    require_once './TestClass' . '.php';
+    require_once 'TestClass' . '.php';
 });
 
 spl_autoload_register('CaseAutoLoad');
@@ -23,5 +23,3 @@ $testClass->print();
 echo "还没实例化 CaseClass \n";
 
 // 在这之前都没有执行第二个 spl_autoload_register函数 也就是利用闭包实现了懒加载
-$s = new CaseClass();
-$s->print();

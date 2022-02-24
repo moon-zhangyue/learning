@@ -10,7 +10,7 @@ class TestClass
 {
     public function print()
     {
-        echo 'Test Class!!';
+        echo "Test Class!!";
+        echo "<br>";
     }
-
 }
