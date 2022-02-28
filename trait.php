@@ -39,6 +39,7 @@ $o->sayWorld();
 $o->sayExclamationMark();*/
 
 
+//Trait也可以互相组合，还可以使用抽象方法，静态属性，静态方法等
 trait Cat
 {
     public function eat()
