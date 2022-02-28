@@ -70,7 +70,9 @@ foreach ($obj->getMethods() as $v) {
     $Methods[$v->getName()] = $v;
 }
 echo "class {$className}\n{\n";
+
 is_array($Properties) && ksort($Properties);
+
 foreach ($Properties as $k => $v) {
     echo "\t";
     echo $v->isPublic() ? ' public' : '', $v->isPrivate() ? ' private' : '',
