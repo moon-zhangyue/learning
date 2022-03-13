@@ -18,49 +18,49 @@ class Coupon
      *
      * @var float
      */
-    protected $amount;
+    protected float $amount;
 
     /**
      * 红包个数
      *
      * @var int
      */
-    protected $num;
+    protected int $num;
 
     /**
      * 领取的红包最小金额
      *
      * @var float
      */
-    protected $coupon_min;
+    protected float $coupon_min;
 
     /**
      * 红包分配结果
      *
      * @var array
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * 初始化
      *
-     * @param float $amount     红包金额（单位：元）最多保留2位小数
-     * @param int $num          红包个数
+     * @param float $amount 红包金额（单位：元）最多保留2位小数
+     * @param int   $num 红包个数
      * @param float $coupon_min 每个至少领取的红包金额
      */
-    public function __construct($amount, $num = 1, $coupon_min = 0.01)
+    public function __construct(float $amount, int $num = 1, float $coupon_min = 0.01)
     {
         $this->amount     = $amount;
         $this->num        = $num;
         $this->coupon_min = $coupon_min;
     }
 
-    /*
+    /**
      * 处理返回
      *
-     * @return array
+     * @throws Exception
      */
-    public function handle()
+    public function handle(): array
     {
         // A. 验证
         if ($this->amount < $validAmount = $this->coupon_min * $this->num) {
@@ -108,12 +108,12 @@ class Coupon
      * 计算分配的红包金额
      *
      * @param float $avg_amount 每次计算的平均金额
-     * @param float $amount     剩余可领取金额
-     * @param int $num          剩余可领取的红包个数
+     * @param float $amount 剩余可领取金额
+     * @param int   $num 剩余可领取的红包个数
      *
      * @return float
      */
-    protected function calcCouponAmount($avg_amount, $amount, $num)
+    protected function calcCouponAmount(float $avg_amount, float $amount, int $num): float
     {
         // 如果平均金额小于等于最低金额，则直接返回最低金额
         if ($avg_amount <= $this->coupon_min) {
@@ -164,7 +164,7 @@ class Coupon
      *
      * @return float
      */
-    protected function decimal_number($amount)
+    protected function decimal_number(float $amount): float
     {
         return sprintf('%01.2f', round($amount, 2));
     }
@@ -172,5 +172,10 @@ class Coupon
 
 // 例子
 $coupon = new Coupon(200, 5, 30);
-$res    = $coupon->handle();
+
+try {
+    $res = $coupon->handle();
+} catch (Exception $e) {
+    $res = $e;
+}
 var_dump($res);
