@@ -47,12 +47,11 @@ class common
      * 检查字符串是否是UTF8编码
      * +----------------------------------------------------------
      *
-     * @param string $string 字符串
-     * +----------------------------------------------------------
+     * @param $str
      *
      * @return Boolean +----------------------------------------------------------
      */
-    public function is_utf8($str)
+    public function is_utf8($str): bool
     {
         $c    = 0;
         $b    = 0;
@@ -97,8 +96,9 @@ class common
      *
      * @return string +----------------------------------------------------------
      */
-    public function msubstr($str, $start = 0, $length, $charset = "utf-8", $suffix = true)
+    public function msubstr(string $str, $start = 0, string $length, string $charset = "utf-8", $suffix = true): string
     {
+        //等同于mb_substr()
         if (function_exists("mb_substr"))
             return mb_substr($str, $start, $length, $charset);
         elseif (function_exists('iconv_substr')) {
@@ -128,7 +128,7 @@ class common
      *
      * @return string +----------------------------------------------------------
      */
-    public function rand_string($len = 6, $type = '', $addChars = '')
+    public function rand_string($len = 6, string $type = '', string $addChars = ''): string
     {
         $str = '';
         switch ($type) {
@@ -173,14 +173,12 @@ class common
      * +----------------------------------------------------------
      *
      * @param integer $number 数量
-     * @param string  $len 长度
-     * @param string  $type 字串类型
-     * 0 字母 1 数字 其它 混合
-     * +----------------------------------------------------------
+     * @param int     $length 长度
+     * @param int     $mode   类型 0 字母 1 数字 其它 混合
      *
-     * @return string +----------------------------------------------------------
+     * @return array|false +----------------------------------------------------------
      */
-    public function build_count_rand($number, $length = 4, $mode = 1)
+    public function build_count_rand(int $number, int $length = 4, int $mode = 1)
     {
         if ($mode == 1 && $length < strlen($number)) {
             // 不足以生成一定数量的不重复数字
@@ -198,8 +196,7 @@ class common
         for ($i = 0; $i < $count * 3; $i++) {
             $rand[] = rand_string($length, $mode);
         }
-        $rand = array_slice(array_unique($rand), 0, $number);
-        return $rand;
+        return array_slice(array_unique($rand), 0, $number);
     }
 
     /**
