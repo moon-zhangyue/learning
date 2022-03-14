@@ -188,11 +188,11 @@ class common
         for ($i = 0; $i < $number; $i++) {
             $rand[] = rand_string($length, $mode);
         }
-        $unqiue = array_unique($rand);
-        if (count($unqiue) == count($rand)) {
+        $unique = array_unique($rand);
+        if (count($unique) == count($rand)) {
             return $rand;
         }
-        $count = count($rand) - count($unqiue);
+        $count = count($rand) - count($unique);
         for ($i = 0; $i < $count * 3; $i++) {
             $rand[] = rand_string($length, $mode);
         }
@@ -213,7 +213,7 @@ class common
      * @return string | array
      * +----------------------------------------------------------
      */
-    public function build_format_rand($format, $number = 1)
+    public function build_format_rand(string $format, int $number = 1)
     {
         $str    = array();
         $length = strlen($format);
@@ -253,7 +253,7 @@ class common
      *
      * @return string +----------------------------------------------------------
      */
-    public function rand_number($min, $max)
+    public function rand_number(int $min, int $max): string
     {
         return sprintf("%0" . strlen($max) . "d", mt_rand($min, $max));
     }
