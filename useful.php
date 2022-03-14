@@ -16,7 +16,7 @@ class common
      * @access public +----------------------------------------------------------
      * @return string +----------------------------------------------------------
      */
-    public function uuid()
+    public function uuid(): string
     {
         $charid = md5(uniqid(mt_rand(), true));
         $hyphen = chr(45); // "-"
@@ -37,7 +37,7 @@ class common
      *
      * @return Boolean +----------------------------------------------------------
      */
-    public function keyGen()
+    public function keyGen(): bool
     {
         return str_replace('-', '', substr(com_create_guid(), 1, -1));
     }
