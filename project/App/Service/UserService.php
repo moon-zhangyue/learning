@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use User;
+
 class UserService
 {
 
@@ -12,12 +14,12 @@ class UserService
 
         $password = encrypt($password);
 
-        $user           = new User();
+        $user = new User();
+
         $user->username = $username;
         $user->password = $password;
-        $result         = $user->save();
 
-        return $result;
+        return $user->save();
     }
 
 }
