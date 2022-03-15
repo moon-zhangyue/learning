@@ -18,5 +18,10 @@ class UserController extends Controller
         //... validation
         return $this->userService->register($this->request->all());
     }
+
+    public function getUserInfo()
+    {
+        return $this->userService->getUserInfo($this->request->all());
+    }
 }
 

@@ -4,16 +4,15 @@ namespace App\Service;
 
 class UserService
 {
-    public UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
-    public function getUserInfo($data)
+    public function getUserInfo(UserRepository $userRepository)
     {
         return $this->userRepository->getUserInfo($data);
     }
+
+    public function register()
+    {
+        return (new CreateUser())->execute($this->request->all());
+    }
 }
+
 
