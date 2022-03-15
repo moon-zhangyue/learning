@@ -2,25 +2,18 @@
 
 namespace App\Service;
 
-use User;
-
 class UserService
 {
+    public UserRepository $userRepository;
 
-    public function register($data)
+    public function __construct(UserRepository $userRepository)
     {
-        $username = $data['username'];
-        $password = $data['password'];
-
-        $password = encrypt($password);
-
-        $user = new User();
-
-        $user->username = $username;
-        $user->password = $password;
-
-        return $user->save();
+        $this->userRepository = $userRepository;
     }
 
+    public function getUserInfo($data)
+    {
+        return $this->userRepository->getUserInfo($data);
+    }
 }
 
