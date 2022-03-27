@@ -1,2 +1,3 @@
 /.idea
 /php-resque-mq/vendor/
+/elasticsearch/vendor/
