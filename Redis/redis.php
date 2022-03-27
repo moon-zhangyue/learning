@@ -12,3 +12,6 @@ if (!$redis->connect('127.0.0.1', 6379)) {
 } else {
     echo '连接正常<br>';
 }
+
+$data = $redis->keys('*');
+dump($data);
