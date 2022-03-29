@@ -7,6 +7,7 @@
  */
 
 $redis = new Redis();
+
 if (!$redis->connect('127.0.0.1', 6379)) {
     trigger_error('Redis连接出错！！！', E_USER_ERROR);
 } else {
@@ -14,4 +15,4 @@ if (!$redis->connect('127.0.0.1', 6379)) {
 }
 
 $data = $redis->keys('*');
-dump($data);
+var_dump($data);
