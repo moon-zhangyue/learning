@@ -2362,18 +2362,18 @@ echo strpbrk($text, 'mi');*/
 
 /*通过位运算符异或方式
 上面所说的方式并不是这次的重点，本次主要想记录一下通过位运算符的方式来交换 2 个变量，并且不借助于第三方变量。先看代码*/
-function swapByBit(&$a, &$b)
-{
-    $a = $a ^ $b;
-    $b = $a ^ $b;
-    $a = $a ^ $b;
-}
-
-$a = 1;
-$b = 2;
-
-swapByBit($a, $b);
-var_dump($a, $b);
+//function swapByBit(&$a, &$b)
+//{
+//    $a = $a ^ $b;
+//    $b = $a ^ $b;
+//    $a = $a ^ $b;
+//}
+//
+//$a = 1;
+//$b = 2;
+//
+//swapByBit($a, $b);
+//var_dump($a, $b);
 // int(2)
 // int(1)
 
@@ -2384,15 +2384,15 @@ var_dump($a, $b);
 异或运算具有可交换性，即 a^b = b^a
 更新一波 php 通过 list 方法交换 2 个变量*/
 
-function swap(&$a, &$b)
-{
-    list($a, $b) = [$b, $a];
-}
-
-$a = 1;
-$b = 2;
-
-swap($a, $b);
-var_dump($a, $b);
+//function swap(&$a, &$b)
+//{
+//    list($a, $b) = [$b, $a];
+//}
+//
+//$a = 1;
+//$b = 2;
+//
+//swap($a, $b);
+//var_dump($a, $b);
 // int(2)
 // int(1)
