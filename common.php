@@ -13,3 +13,8 @@ var_dump($cn_substr);
 
 $bodytag = str_replace("%body%", "black", "<body text='%body%'>");
 echo $bodytag;
+
+$mystring = 'abc';
+$findme   = 'a';
+$pos      = strpos($mystring, $findme);
+var_dump($pos);
