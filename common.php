@@ -27,3 +27,14 @@ if (preg_match("/php/i", "PHP is the web scripting language of choice.")) {
 }
 
 //如果你仅仅想要检查某个字符串是否包含另外一个字符串，不要使用preg_match()。 使用 strpos() 会更快。
+
+$num      = 5;
+$location = 'tree';
+
+$format = 'There are %d monkeys in the %s';
+echo sprintf($format, $num, $location);
+
+$pattern     = '/(\w+) (\d+), (\d+)/i';
+$replacement = '${1}1,$3';
+$string      = 'April 15, 2003';
+var_dump(preg_replace($pattern, $replacement, $string));
