@@ -30,3 +30,7 @@ var_dump($redis->hVals('user1')); //返回hash key对应所有的field的value �
 var_dump($redis->hExists('user1', 'name'));
 var_dump($redis->hLen('user1')); //	获取hash key field的数量
 var_dump($redis->hIncrBy('user1', 'age', 2));
+
+//list操作
+var_dump($redis->rPush('list1','a','b','c'));
+var_dump($redis->lPush('list1','aa','bb','cc'));
