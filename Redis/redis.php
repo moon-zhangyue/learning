@@ -74,3 +74,4 @@ field不能相同，value可以相同*/
 //zset有序集合
 /*Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数(score)却可以重复。*/
 var_dump($redis->zAdd('zset', 1, 'a', 2, 'b')); //添加score和element
+var_dump($redis->zrank('zset','b')); //返回元素排名
