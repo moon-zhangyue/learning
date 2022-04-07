@@ -54,18 +54,23 @@ field不能相同，value可以相同*/
 
 
 //set操作-Redis 的 Set 是 String 类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。 Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。
-var_dump($redis->sAdd('set', 'a', 'b', 'c'));
-var_dump($redis->sAdd('set1', 'a', 'b', 'd'));
+//var_dump($redis->sAdd('set', 'a', 'b', 'c'));
+//var_dump($redis->sAdd('set1', 'a', 'b', 'd'));
 //var_dump($redis->srem('set', 'a', 'b', 'c'));//将集合key中的element移除掉
-var_dump($redis->sMembers('set'));
-var_dump($redis->sMembers('set1'));
-var_dump($redis->sCard('set')); //判断大小
-var_dump($redis->sIsMember('set', 'a')); //判断是否存在
-var_dump($redis->sRandMember('set', 2)); //随机挑选
-var_dump($redis->sDiff('set', 'set1')); //差集
-var_dump($redis->sInter('set', 'set1')); //交集
-var_dump($redis->sUnion('set', 'set1')); //并集
+//var_dump($redis->sMembers('set'));
+//var_dump($redis->sMembers('set1'));
+//var_dump($redis->sCard('set')); //判断大小
+//var_dump($redis->sIsMember('set', 'a')); //判断是否存在
+//var_dump($redis->sRandMember('set', 2)); //随机挑选
+//var_dump($redis->sDiff('set', 'set1')); //差集
+//var_dump($redis->sInter('set', 'set1')); //交集
+//var_dump($redis->sUnion('set', 'set1')); //并集
 
 //srandmember不会破坏集合
 //spop会破会
 //smembers 返回的是无序集合，并且要注意量很大的时候回阻塞
+
+
+//zset有序集合
+/*Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数(score)却可以重复。*/
+var_dump($redis->zAdd('zset', 1, 'a', 2, 'b')); //添加score和element
