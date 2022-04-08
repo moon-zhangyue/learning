@@ -167,7 +167,7 @@ echo "总活跃用户：" . $redis->bitCount('stat2') . PHP_EOL;*/
 前段时间开发一个项目，对方给我提供了一个查询当前用户是否在线的接口。不了解对方是怎么做的，自己考虑了一下，使用bitmap是一个节约空间效率又高的一种方法，只需要一个key，然后用户ID为offset，如果在线就设置为1，不在线就设置为0，和上面的场景一样，5000W用户只需要6MB的空间。*/
 
 //批量设置在线状态
-$uids = range(1, 500000);
+/*$uids = range(1, 500000);
 foreach ($uids as $uid) {
     $redis->setBit('online', $uid, $uid % 2);
 }
@@ -179,9 +179,31 @@ foreach ($uids as $uid) {
 }
 $endTime = microtime(true);
 //在我的电脑上，获取50W个用户的状态需要25秒
-echo "total:" . ($endTime - $startTime) . "s";
+echo "total:" . ($endTime - $startTime) . "s";*/
 
 /**
  * 对于批量的获取，上面是一种效率低的办法，实际可以通过get获取到value，然后自己计算
  * 具体计算方法改天再写吧，之前写的代码找不见了。。。
  */
+
+var_dump($redis->getBit('stat2', 0));
+var_dump($redis->get('stat2'));
+
+$bit = $redis->get('stat2');
+
+$bitmap = unpack('C*', $bit); //二进制字符串对数据进行解包  C*unsigned char
+var_dump($bitmap);
+
+$hex_arr = unpack("H*", $bit); //十六进制字符串，高位在前
+echo decbin(hexdec($hex_arr[1]));
+
+$bitLength = strlen($bit);
+while ($bitLength % 4 != 0) {
+    $bitLength++;
+}
+
+$bit = str_pad($bit, $bitLength, pack('n', 0));
+$bit = unpack('n*', $bit);
+
+var_dump($bit);
+
