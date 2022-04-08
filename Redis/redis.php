@@ -87,7 +87,7 @@ field不能相同，value可以相同*/
 
 //使用场景一:用户签到
 //用户uid
-$uid = 11;
+/*$uid = 11;
 
 //记录有uid的key
 $cacheKey = sprintf("sign_%d", $uid);
@@ -115,13 +115,53 @@ echo 1 == $bitStatus ? '今天已经签到啦' : '还没有签到呢';
 echo PHP_EOL;
 
 //计算总签到次数
-echo $redis->bitCount($cacheKey) . PHP_EOL;
+echo $redis->bitCount($cacheKey) . PHP_EOL; */
 
 /**
  * 计算某段时间内的签到次数
  * 很不幸啊,bitCount虽然提供了start和end参数，但是这个说的是字符串的位置，而不是对应"位"的位置
  * 幸运的是我们可以通过get命令将value取出来，自己解析。并且这个value不会太大，上面计算过一年一个用户只需要45个字节
- * 给我们的网站定一个小目标，运行30年，那么一共需要1.31KB(就问你屌不屌？)
+ * 给我们的网站定一个小目标，运行30年，那么一共只需要1.31KB
  */
 //这是个错误的计算方式
-echo $redis->bitCount($cacheKey, 0, 20) . PHP_EOL;
+//echo $redis->bitCount($cacheKey, 0, 20) . PHP_EOL;
+
+/*使用时间作为cacheKey，然后用户ID为offset，如果当日活跃过就设置为1
+那么我该如果计算某几天/月/年的活跃用户呢(暂且约定，统计时间内只有有一天在线就称为活跃)，有请下一个redis的命令
+命令 BITOP operation destkey key [key ...]
+说明：对一个或多个保存二进制位的字符串 key 进行位元操作，并将结果保存到 destkey 上。
+说明：BITOP 命令支持 AND 、 OR 、 NOT 、 XOR 这四种操作中的任意一种参数*/
+
+//日期对应的活跃用户
+/*$data = array(
+    '2017-01-10' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+    '2017-01-11' => array(1, 2, 3, 4, 5, 6, 7, 8),
+    '2017-01-12' => array(1, 2, 3, 4, 5, 6),
+    '2017-01-13' => array(1, 2, 3, 4),
+    '2017-01-14' => array(1, 2)
+);
+
+//批量设置活跃状态
+foreach ($data as $date => $uids) {
+    $cacheKey = sprintf("stat_%s", $date);
+    foreach ($uids as $uid) {
+        $redis->setBit($cacheKey, $uid, 1); //短的自动补0
+    }
+}
+
+$redis->bitOp('AND', 'stat', 'stat_2017-01-10', 'stat_2017-01-11', 'stat_2017-01-12') . PHP_EOL;
+//总活跃用户：6
+echo "总活跃用户：" . $redis->bitCount('stat') . PHP_EOL;
+
+$redis->bitOp('AND', 'stat1', 'stat_2017-01-10', 'stat_2017-01-11', 'stat_2017-01-14') . PHP_EOL;
+//总活跃用户：2
+echo "总活跃用户：" . $redis->bitCount('stat1') . PHP_EOL;
+
+$redis->bitOp('AND', 'stat2', 'stat_2017-01-10', 'stat_2017-01-11') . PHP_EOL;
+//总活跃用户：8
+echo "总活跃用户：" . $redis->bitCount('stat2') . PHP_EOL;*/
+
+//假设当前站点有5000W用户，那么一天的数据大约为50000000/8/1024/1024=6MB
+
+/*使用场景三：用户在线状态
+前段时间开发一个项目，对方给我提供了一个查询当前用户是否在线的接口。不了解对方是怎么做的，自己考虑了一下，使用bitmap是一个节约空间效率又高的一种方法，只需要一个key，然后用户ID为offset，如果在线就设置为1，不在线就设置为0，和上面的场景一样，5000W用户只需要6MB的空间。*/
