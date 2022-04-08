@@ -102,7 +102,7 @@ $todayDate = '2022-01-21';
 $startTime = strtotime($startDate);
 $todayTime = strtotime($todayDate);
 $offset    = floor(($todayTime - $startTime) / 86400);
-
+$offset = date('d', time());
 echo "今天是第{$offset}天" . PHP_EOL;
 
 //签到
