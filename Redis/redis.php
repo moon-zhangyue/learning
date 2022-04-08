@@ -84,3 +84,44 @@ field不能相同，value可以相同*/
 //$redis->set('hell','a');
 //var_dump($redis->bitCount('hell', 0, 5)); //获取位图指定范围（start 到end，单位为字节，如果不指定就获取全部）位值为1的个数
 //var_dump($redis->bitOp('and', 'hello', 'hell'));//做多个bitmap的and，or，not，xor操作并将结果保存在destkey中
+
+//使用场景一:用户签到
+//用户uid
+$uid = 11;
+
+//记录有uid的key
+$cacheKey = sprintf("sign_%d", $uid);
+
+//开始有签到功能的日期
+$startDate = '2022-01-01';
+
+//今天的日期
+$todayDate = '2022-01-21';
+
+//计算offset
+$startTime = strtotime($startDate);
+$todayTime = strtotime($todayDate);
+$offset    = floor(($todayTime - $startTime) / 86400);
+
+echo "今天是第{$offset}天" . PHP_EOL;
+
+//签到
+//一年一个用户会占用多少空间呢？大约365/8=45.625个字节，好小，有木有被惊呆？
+$redis->setBit($cacheKey, $offset, 1);
+
+//查询签到情况
+$bitStatus = $redis->getBit($cacheKey, $offset);
+echo 1 == $bitStatus ? '今天已经签到啦' : '还没有签到呢';
+echo PHP_EOL;
+
+//计算总签到次数
+echo $redis->bitCount($cacheKey) . PHP_EOL;
+
+/**
+ * 计算某段时间内的签到次数
+ * 很不幸啊,bitCount虽然提供了start和end参数，但是这个说的是字符串的位置，而不是对应"位"的位置
+ * 幸运的是我们可以通过get命令将value取出来，自己解析。并且这个value不会太大，上面计算过一年一个用户只需要45个字节
+ * 给我们的网站定一个小目标，运行30年，那么一共需要1.31KB(就问你屌不屌？)
+ */
+//这是个错误的计算方式
+echo $redis->bitCount($cacheKey, 0, 20) . PHP_EOL;
