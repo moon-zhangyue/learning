@@ -22,7 +22,7 @@ $data = $redis->keys('*');
 //$res = $redis->hSet('user1', 'name', 'hahaha');
 //var_dump($res);
 
-$res = $redis->hGet('user1', 'age');
+//$res = $redis->hGet('user1', 'age');
 //var_dump($res);
 
 //hash操作
@@ -73,5 +73,14 @@ field不能相同，value可以相同*/
 
 //zset有序集合
 /*Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数(score)却可以重复。*/
-var_dump($redis->zAdd('zset', 1, 'a', 2, 'b')); //添加score和element
-var_dump($redis->zrank('zset','b')); //返回元素排名
+//var_dump($redis->zAdd('zset', 1, 'a', 2, 'b')); //添加score和element
+//var_dump($redis->zrank('zset', 'b')); //返回元素排名
+
+//Bitmap 位图
+//var_dump($redis->set('hello', 'big'));
+//var_dump($redis->getBit('hello', 0)); //获取位图指定索引的值
+//var_dump($redis->setBit('hello', 0, 1)); //给位图指定索引设置值
+//echo ($redis->get('hello'));
+//$redis->set('hell','a');
+//var_dump($redis->bitCount('hell', 0, 5)); //获取位图指定范围（start 到end，单位为字节，如果不指定就获取全部）位值为1的个数
+//var_dump($redis->bitOp('and', 'hello', 'hell'));//做多个bitmap的and，or，not，xor操作并将结果保存在destkey中
