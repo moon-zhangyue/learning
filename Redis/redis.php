@@ -5,17 +5,26 @@
  * Time: 2022/3/27 20:57
  * Module: redis.php
  */
-
+echo 1;
 $redis = new Redis();
 
-if (!$redis->connect('127.0.0.1', 6379)) {
-    trigger_error('Redis连接出错！！！', E_USER_ERROR);
-} else {
+try {
+    if(!$redis->connect('redis', 6379)){ //dnmp连接方式 具体情况请参考文档
+        throw new Exception('Redis连接出错！！！'.E_USER_ERROR);
+    }
     echo '连接正常<br>';
+} catch (Exception $e) {
+    echo $e->getMessage(); // 返回自定义的异常信息
 }
+//if (!$redis->connect('127.0.0.1', 6379)) {
+//    trigger_error('Redis连接出错！！！', E_USER_ERROR);
+//
+//} else {
+//    echo '连接正常<br>';
+//}
 
 $data = $redis->keys('*');
-//var_dump($data);
+var_dump($data);
 
 
 //$res = $redis->hSet('user1', 'age', 26);
