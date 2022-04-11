@@ -5,23 +5,22 @@
  * Time: 2022/3/27 20:57
  * Module: redis.php
  */
-echo 1;
 $redis = new Redis();
 
-try {
-    if (!$redis->connect('redis', 6379)) { //dnmp连接方式 具体情况请参考文档
-        throw new Exception('Redis连接出错！！！' . E_USER_ERROR);
-    }
-    echo '连接正常<br>';
-} catch (Exception $e) {
-    echo $e->getMessage(); // 返回自定义的异常信息
-}
-//if (!$redis->connect('127.0.0.1', 6379)) {
-//    trigger_error('Redis连接出错！！！', E_USER_ERROR);
-//
-//} else {
+//try {
+//    if (!$redis->connect('redis', 6379)) { //dnmp连接方式 具体情况请参考文档
+//        throw new Exception('Redis连接出错！！！' . E_USER_ERROR);
+//    }
 //    echo '连接正常<br>';
+//} catch (Exception $e) {
+//    echo $e->getMessage(); // 返回自定义的异常信息
 //}
+if (!$redis->connect('127.0.0.1', 6379)) {
+    trigger_error('Redis连接出错！！！', E_USER_ERROR);
+
+} else {
+    echo '连接正常<br>';
+}
 
 $data = $redis->keys('*');
 var_dump($data);
@@ -216,14 +215,8 @@ $bit = unpack('n*', $bit);
 
 var_dump($bit);*/
 
-/*SCAN 命令是一个基于游标的迭代器，每次被调用之后， 都会向用户返回一个新的游标， 用户在下次迭代时需要使用这个新游标作为 SCAN 命令的游标参数， 以此来延续之前的迭代过程。
-SCAN 返回一个包含两个元素的数组， 第一个元素是用于进行下一次迭代的新游标， 而第二个元素则是一个数组， 这个数组中包含了所有被迭代的元素。如果新游标返回 0 表示迭代已结束。*/
+//$iterator = 3;
+var_dump($redis->scan($iterator, 'stat*', 10));
+//var_dump($iterator);
 
-
-/*Scan 命令注意事项：
-
-返回的结果可能会有重复，需要客户端去重复，这点非常重要;
-遍历的过程中如果有数据修改，改动后的数据能不能遍历到是不确定的;
-单次返回的结果是空的并不意味着遍历结束，而要看返回的游标值是否为零;*/
-
-var_dump($redis->scan());
+var_dump($redis->slowLog('get',5));
