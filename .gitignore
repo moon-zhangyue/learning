@@ -2,3 +2,4 @@
 /php-resque-mq/vendor/
 /elasticsearch/vendor/
 /composer_test/vendor/
+vendor
