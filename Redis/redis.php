@@ -5,17 +5,25 @@
  * Time: 2022/3/27 20:57
  * Module: redis.php
  */
-
 $redis = new Redis();
 
+//try {
+//    if (!$redis->connect('redis', 6379)) { //dnmp连接方式 具体情况请参考文档
+//        throw new Exception('Redis连接出错！！！' . E_USER_ERROR);
+//    }
+//    echo '连接正常<br>';
+//} catch (Exception $e) {
+//    echo $e->getMessage(); // 返回自定义的异常信息
+//}
 if (!$redis->connect('127.0.0.1', 6379)) {
     trigger_error('Redis连接出错！！！', E_USER_ERROR);
+
 } else {
     echo '连接正常<br>';
 }
 
 $data = $redis->keys('*');
-//var_dump($data);
+var_dump($data);
 
 
 //$res = $redis->hSet('user1', 'age', 26);
@@ -186,7 +194,7 @@ echo "total:" . ($endTime - $startTime) . "s";*/
  * 具体计算方法改天再写吧，之前写的代码找不见了。。。
  */
 
-var_dump($redis->getBit('stat2', 0));
+/*var_dump($redis->getBit('stat2', 0));
 var_dump($redis->get('stat2'));
 
 $bit = $redis->get('stat2');
@@ -205,5 +213,10 @@ while ($bitLength % 4 != 0) {
 $bit = str_pad($bit, $bitLength, pack('n', 0));
 $bit = unpack('n*', $bit);
 
-var_dump($bit);
+var_dump($bit);*/
 
+//$iterator = 3;
+var_dump($redis->scan($iterator, 'stat*', 10));
+//var_dump($iterator);
+
+var_dump($redis->slowLog('get',5));
