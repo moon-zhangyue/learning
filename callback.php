@@ -67,7 +67,7 @@ action($arr, 'A::insert');
 action($arr, array('A', 'insert'));*/
 
 //类方法
-$arr = range(0, 100);//模拟生成1001条数据
+/*$arr = range(0, 100);//模拟生成1001条数据
 function action(array $arr, callable $function)
 {
     foreach ($arr as $value) {
@@ -87,4 +87,17 @@ class A
 }
 
 $a = new A();
-action($arr, array($a, 'insert'));
+action($arr, array($a, 'insert'));*/
+
+//匿名函数
+function a($callback)
+{
+    return $callback();
+}
+
+$str1 = "hello,";
+$str2 = "Tioncico,";
+a(function () use ($str1, $str2) {
+    echo $str1, $str2, "EasySwoole\n";
+    return 1;
+});
