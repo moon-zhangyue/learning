@@ -6,6 +6,18 @@
  * Module: pthread.php
  */
 
+/*警告
+此扩展已被声明为停止维护状态。
+
+小技巧
+建议使用 parallel 作为替代。
+
+警告
+不可以在 web 服务器环境中使用 pthreads 扩展， PHP 多线程开发仅限于命令行模式的应用。
+
+警告
+只能在 PHP 7.2+ 版本中使用 pthreads (v3) 扩展， 在 PHP 7.0 和 7.1 版本中，ZTS 模式是不安全的。*/
+
 file_put_contents(dirname(__FILE__) . '/1.txt', '1111', FILE_APPEND);
 
 class test extends Thread
