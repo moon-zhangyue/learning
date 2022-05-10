@@ -1,5 +1,6 @@
 {
   "require":{
-    "kain/think-redis": "^1.10"
+    "kain/think-redis": "^1.10",
+    "stil/gif-endec": "^0.2.0"
   }
 }
